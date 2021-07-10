@@ -1,42 +1,17 @@
 module.exports = function check(str, bracketsConfig) {
-// '()'  ---->   ['(', ')']
-let myStack = [];
-    // let bracketsPosition = {
-    // [')'] : bracketsConfig[0],
-    // [']'] : bracketsConfig[1],
-    // ['}'] : bracketsConfig[2],
-    // ['|'] :bracketsConfig[3],
-
-    // }
-
-    // let bracketsPosition2 = {
-    //     ['('] : bracketsConfig[0],
-    //     ['['] : bracketsConfig[1],
-    //     ['{'] : bracketsConfig[2],
-    //     ['|'] :bracketsConfig[3]
-    // }
-
-
-for (let i= 0; i<str.length; i++){
-   let eachEl = str[i];
-   for (let j= 0; j < bracketsConfig.length; j++) {
-
-    if (eachEl == bracketsConfig[j][0]){
-     myStack.push(eachEl);
-    } else {
-        if (myStack.length === 0){
-            return false
-        }
-
-        else if (eachEl == bracketsConfig[j][1]) {
-            myStack.pop();
+    let bracketsList = bracketsConfig.map((item) => 
+      item.join(""))
+    
+    let i = 0;
+    let empty = ""
+      while (i < bracketsList.length) {
+        if (str.includes(bracketsList[i])) {
+          while (str.includes(bracketsList[i])) {
+            str =  str.replace(bracketsList[i],empty);
+      } i = 0;
         } else {
-            return false
+          i ++
         }
-
-    } 
-}
-}
-
-return myStack.length === 0
+        
+    } return str.length ===0;
 }
